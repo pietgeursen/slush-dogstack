@@ -6,7 +6,7 @@
   "scripts": {
     "start": "budo . -d --serve bundle.js --live",
     "build": "browserify . -o bundle.js -g uglifyify",
-    "test": "browserify test.js | smokestack | tap-spec",
+    "test": "browserify test.js | node | tap-spec",
     "dist": "mkdir -p dist && bash -c 'cp *.{js,html,css} dist'",
     "push": "gh-pages -d dist",
     "deploy": "npm run build && npm run dist && npm run push"
@@ -30,10 +30,10 @@
     "babel-preset-react": "^6.5.0",
     "babelify": "^7.2.0",
     "browserify": "^10.0.0",
-    "budo": "^4.0.0",
+    "budo": "^8.2.0",
     "gh-pages": "^0.3.0",
-    "react": "^0.14.7", 
-    "smokestack": "^3.3.0",
+    "react": "^0.15.0", 
+    "react-dom": "^0.15.0", 
     "tap-spec": "^4.0.2",
     "tape": "^4.0.0",
     "uglifyify": "^3.0.1",
