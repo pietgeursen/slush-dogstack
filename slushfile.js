@@ -33,8 +33,8 @@ gulp.task('default', function (done) {
     type: 'confirm',
     name: 'moveon',
     message: 'Continue?',
-  }],
-  function (answers) {
+  }])
+  .then(function (answers) {
     if (!answers.moveon) {
       return done();
     }
@@ -60,5 +60,5 @@ gulp.task('default', function (done) {
       .on('finish', function () {
         done(); // Finished! 
       });
-  });
+  })
 });
