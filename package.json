@@ -1,6 +1,6 @@
 {
   "name": "slush-pages-react",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "a slush generator for static pages with react using browserify",
   "main": "slushfile.js",
   "scripts": {
