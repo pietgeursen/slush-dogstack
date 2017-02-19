@@ -1,14 +1,14 @@
 {
-  "name": "slush-pages-react",
-  "version": "1.0.10",
-  "description": "a slush generator for static pages with react using browserify",
+  "name": "slush-dogstack",
+  "version": "1.0.0",
+  "description": "a slush generator for root systems dogstack",
   "main": "slushfile.js",
   "scripts": {
     "test": "tape test"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/pietgeursen/slush-pages-react"
+    "url": "https://github.com/pietgeursen/slush-dogstack"
   },
   "keywords": [
     "slush",
@@ -24,16 +24,24 @@
   "author": "pietgeursen",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/pietgeursen/slush-pages-react/issues"
+    "url": "https://github.com/pietgeursen/slush-dogstack"
   },
-  "homepage": "https://github.com/pietgeursen/slush-pages-react",
+  "homepage": "https://github.com/pietgeursen/slush-dogstack",
   "dependencies": {
     "gulp": "^3.9.1",
     "gulp-conflict": "^0.4.0",
     "gulp-install": "^0.6.0",
     "gulp-rename": "^1.2.2",
     "gulp-template": "^4.0.0",
-    "inquirer": "^1.0.2",
-    "osi-licenses": "^0.1.1"
+    "inquirer": "^3.0.1",
+    "lodash": "^4.17.4",
+    "osi-licenses": "^0.1.1",
+    "pull-promise": "^2.0.0",
+    "pull-stream": "^3.5.0",
+    "pull-task": "0.0.0",
+    "pull-vinyl": "^1.2.0"
+  },
+  "devDependencies": {
+    "pull-vinyl": "^1.2.0"
   }
 }
