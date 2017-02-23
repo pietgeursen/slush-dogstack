@@ -40,11 +40,24 @@ gulp.task('default', function (done) {
 
 gulp.task('domain', function (done) {
   promptDomain()
-    .then(console.log)
+    .then(function(answers) {
+      const name = answers.name
+      answers.NAME = name.toUpperCase()
+      gulp.src(__dirname + '/template/domain/**', {
+      })
+        // Lodash template support
+        .pipe(template(answers))
+        // Confirms overwrites on file conflicts
+        .pipe(conflict(`./${name}`))
+        // Without __dirname here = relative to cwd
+        .pipe(gulp.dest(`./${name}`))
+        .on('finish', function () {
+          done() // Finished!
+      })
+  })
 })
 
 function promptDomain() {
-  
   return inquirer.prompt([{
     type: 'input',
     name: 'name',
@@ -53,6 +66,7 @@ function promptDomain() {
     default: gulp.args.join(' ')
   }])
 }
+
 function promptProject() {
   return inquirer.prompt([{
     type: 'input',
