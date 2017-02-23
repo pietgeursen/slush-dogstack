@@ -1,7 +1,8 @@
 import { connect } from 'react-redux'
 
 import New from '../components/new'
-import { <%= name %>Create } from '../actions'
+import actions from '../actions'
+const { <%= name %>Create } = actions 
 
 export default connect(
   null,
