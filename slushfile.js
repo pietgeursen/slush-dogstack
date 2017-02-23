@@ -5,6 +5,7 @@ var template = require('gulp-template')
 var rename = require('gulp-rename')
 var inquirer = require('inquirer')
 var licenses = require('osi-licenses')
+var titleCase = require('title-case')
 
 gulp.task('default', function (done) {
   promptProject()
@@ -38,6 +39,28 @@ gulp.task('default', function (done) {
 })
 
 
+gulp.task('action', function (done) {
+  promptAction()
+    .then(function(answers) {
+      const { actionName, domainName } = answers
+      answers.ACTION_NAME = actionName.toUpperCase()
+      answers.ActionName = titleCase(actionName) 
+      answers.DOMAIN_NAME = domainName.toUpperCase()
+
+      gulp.src(__dirname + '/template/action/**', {
+      })
+        // Lodash template support
+        .pipe(template(answers))
+        // Confirms overwrites on file conflicts
+        .pipe(conflict(`./${domainName}/actions`))
+        // Without __dirname here = relative to cwd
+        .pipe(gulp.dest(`./${domainName}/actions`))
+        .on('finish', function () {
+          done() // Finished!
+      })
+  })
+})
+
 gulp.task('domain', function (done) {
   promptDomain()
     .then(function(answers) {
@@ -67,6 +90,19 @@ function promptDomain() {
   }])
 }
 
+function promptAction() {
+  return inquirer.prompt([{
+    type: 'input',
+    name: 'domainName',
+    message: 'What domain do you want to create this action in',
+    default: 'dogs' 
+  },{
+    type: 'input',
+    name: 'actionName',
+    message: 'What do you want to call your action',
+    default: 'update' 
+  }])
+}
 function promptProject() {
   return inquirer.prompt([{
     type: 'input',
