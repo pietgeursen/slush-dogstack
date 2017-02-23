@@ -7,33 +7,7 @@ var inquirer = require('inquirer')
 var licenses = require('osi-licenses')
 
 gulp.task('default', function (done) {
-  inquirer.prompt([{
-    type: 'input',
-    name: 'name',
-    message: 'Give your app a name',
-    // Get app name from arguments by default
-    default: gulp.args.join(' ')
-  }, {
-    type: 'input',
-    name: 'description',
-    message: 'How would you describe the app?',
-    default: "it's a real sweet app"
-  }, {
-    type: 'input',
-    name: 'author',
-    message: 'What is your name on GitHub?',
-    default: 'author'
-  }, {
-    type: 'list',
-    name: 'license',
-    message: 'Choose a license:',
-    choices: Object.keys(licenses),
-    default: 'ISC'
-  }, {
-    type: 'confirm',
-    name: 'moveon',
-    message: 'Continue?'
-  }])
+  promptProject()
     .then(function (answers) {
       if (!answers.moveon) {
         return done()
@@ -62,3 +36,49 @@ gulp.task('default', function (done) {
         })
     })
 })
+
+
+gulp.task('domain', function (done) {
+  promptDomain()
+    .then(console.log)
+})
+
+function promptDomain() {
+  
+  return inquirer.prompt([{
+    type: 'input',
+    name: 'name',
+    message: 'Give your domain a name',
+    // Get app name from arguments by default
+    default: gulp.args.join(' ')
+  }])
+}
+function promptProject() {
+  return inquirer.prompt([{
+    type: 'input',
+    name: 'name',
+    message: 'Give your app a name',
+    // Get app name from arguments by default
+    default: gulp.args.join(' ')
+  }, {
+    type: 'input',
+    name: 'description',
+    message: 'How would you describe the app?',
+    default: "it's a real sweet app"
+  }, {
+    type: 'input',
+    name: 'author',
+    message: 'What is your name on GitHub?',
+    default: 'author'
+  }, {
+    type: 'list',
+    name: 'license',
+    message: 'Choose a license:',
+    choices: Object.keys(licenses),
+    default: 'ISC'
+  }, {
+    type: 'confirm',
+    name: 'moveon',
+    message: 'Continue?'
+  }])
+}
