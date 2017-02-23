@@ -3,7 +3,7 @@ import t from 'tcomb-form'
 
 import styles from '../styles/new'
 
-import { ClientFormSchema } from '../types'
+import { FormSchema } from '../types'
 
 const options = {
   fields: {
@@ -25,7 +25,7 @@ export default class New extends React.Component {
       <div className={styles.formContainer}>
         <h2>Create a new <%= name %></h2>
         <form onSubmit={(evt) => this.onSubmit(evt)} >
-          <t.form.Form type={ClientFormSchema} options={options} ref='form' />
+          <t.form.Form type={FormSchema} options={options} ref='form' />
           <button type='submit'>Create</button>
         </form>
       </div>
