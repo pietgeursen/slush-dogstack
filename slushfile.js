@@ -64,8 +64,9 @@ gulp.task('action', function (done) {
 gulp.task('domain', function (done) {
   promptDomain()
     .then(function(answers) {
-      answers.name = i.pluralize(answers.name)
-      answers.names = i.singularize(answers.name)
+      const names = answers.name 
+      answers.names = i.pluralize(names)
+      answers.name = i.singularize(names)
       answers.Name = i.titleize(answers.name)
       answers.Names = i.titleize(answers.names)
       answers.NAME = answers.name.toUpperCase()
@@ -76,9 +77,9 @@ gulp.task('domain', function (done) {
         // Lodash template support
         .pipe(template(answers))
         // Confirms overwrites on file conflicts
-        .pipe(conflict(`./${answers.name}`))
+        .pipe(conflict(`./${answers.names}`))
         // Without __dirname here = relative to cwd
-        .pipe(gulp.dest(`./${answers.name}`))
+        .pipe(gulp.dest(`./${answers.names}`))
         .on('finish', function () {
           done() // Finished!
       })
