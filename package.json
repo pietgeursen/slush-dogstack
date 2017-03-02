@@ -33,6 +33,7 @@
     "gulp-install": "^0.6.0",
     "gulp-rename": "^1.2.2",
     "gulp-template": "^4.0.0",
+    "i": "^0.3.5",
     "inquirer": "^1.0.2",
     "osi-licenses": "^0.1.1",
     "title-case": "^2.1.0"

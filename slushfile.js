@@ -5,7 +5,7 @@ var template = require('gulp-template')
 var rename = require('gulp-rename')
 var inquirer = require('inquirer')
 var licenses = require('osi-licenses')
-var titleCase = require('title-case')
+var i = require('i')()
 
 gulp.task('default', function (done) {
   promptProject()
@@ -19,7 +19,7 @@ gulp.task('default', function (done) {
         dot: true
       })
         // Lodash template support
-        .pipe(template(answers))
+        .pipe(template(answers, {interpolate: /<%=([\s\S]+?)%>/g }))
         // Rename dotfiles
         .pipe(rename(function (file) {
           if (file.basename[0] === '_') {
@@ -64,16 +64,21 @@ gulp.task('action', function (done) {
 gulp.task('domain', function (done) {
   promptDomain()
     .then(function(answers) {
-      const name = answers.name
-      answers.NAME = name.toUpperCase()
+      answers.name = i.pluralize(answers.name)
+      answers.names = i.singularize(answers.name)
+      answers.Name = i.titleize(answers.name)
+      answers.Names = i.titleize(answers.names)
+      answers.NAME = answers.name.toUpperCase()
+      answers.NAMES = answers.names.toUpperCase()
+
       gulp.src(__dirname + '/template/domain/**', {
       })
         // Lodash template support
         .pipe(template(answers))
         // Confirms overwrites on file conflicts
-        .pipe(conflict(`./${name}`))
+        .pipe(conflict(`./${answers.name}`))
         // Without __dirname here = relative to cwd
-        .pipe(gulp.dest(`./${name}`))
+        .pipe(gulp.dest(`./${answers.name}`))
         .on('finish', function () {
           done() // Finished!
       })
@@ -84,7 +89,7 @@ function promptDomain() {
   return inquirer.prompt([{
     type: 'input',
     name: 'name',
-    message: 'Give your domain a name',
+    message: 'What is the name of your doman, should be pluralised eg: cats',
     // Get app name from arguments by default
     default: gulp.args.join(' ')
   }])

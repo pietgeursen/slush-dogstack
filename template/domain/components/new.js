@@ -3,16 +3,19 @@ import t from 'tcomb-form'
 
 import styles from '../styles/new'
 
-import { FormSchema } from '../types'
+import { <%= Name %>FormSchema } from '../types'
 
 const options = {
   fields: {
     name: {
       error: 'Invalid name'
+    },
+    website: {
+      error: 'Invalid website url'
     }
   }
 }
-export default class New extends React.Component {
+export default class <%= Name %>Create extends React.Component {
 
   onSubmit (evt) {
     evt.preventDefault()
@@ -22,10 +25,10 @@ export default class New extends React.Component {
 
   render () {
     return (
-      <div className={styles.formContainer}>
-        <h2>Create a new <%= name %></h2>
+      <div className={styles.container}>
+        <h2>Add a <%= Name %></h2>
         <form onSubmit={(evt) => this.onSubmit(evt)} >
-          <t.form.Form type={FormSchema} options={options} ref='form' />
+          <t.form.Form type={<%= Name %>FormSchema} options={options} ref='form' />
           <button type='submit'>Create</button>
         </form>
       </div>
